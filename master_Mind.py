@@ -7,6 +7,9 @@
 print("MasterMind")
 
 import random
+# import bcrypt
+
+
 
 def generate_Code(length=4, digits=6):
     return [str(random.randint(1, digits)) for _ in range(length)]
@@ -28,13 +31,30 @@ def get_Feedback(secret, guess):
     return black_Pegs, white_Pegs
 
 def show_Secret(mystery):
-    print(mystery)
+    user = "Admin"
+    password =  "P@ssw0rd"
+
+    bytes = password.encode('utf-8')
+
+    salt = bcrypt.gensalt() 
+
+    hash = bcrypt.hashpw(bytes, salt)
+
+    userinput = input("Your username")
+    passwordinput = input("Your password")
+
+    if userinput == user and passwordinput == password :
+        print(mystery)
+    else:
+        print("Access denied!")
 
 def play_Mastermind():
     print("Welcome to Mastermind!")
     print("Guess the 4-digit code. Each digit is from 1 to 6. You have 10 attempts.")
     secret_Code = generate_Code()
     attempts = 10
+
+    
 
     for attempt in range(1, attempts + 1):
         guess = ""
@@ -44,7 +64,7 @@ def play_Mastermind():
             valid_Guess = len(guess) == 4 and all(c in "123456" for c in guess)
             if not valid_Guess:
                 print("Invalid input. Enter 4 digits, each from 1 to 6.")
-            show_Secret(secret_Code) if guess == "cheat" else False
+            show_Secret(secret_Code) if guess == "login" else False
 
         black, white = get_Feedback(secret_Code, guess)
         print(f"Black pegs (correct position): {black}, White pegs (wrong position): {white}")
