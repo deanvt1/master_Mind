@@ -34,11 +34,11 @@ def show_Secret(mystery):
     user = "Admin"
     password =  "P@ssw0rd"
 
-    bytes = password.encode('utf-8')
+    # bytes = password.encode('utf-8')
 
-    salt = bcrypt.gensalt() 
+    # salt = bcrypt.gensalt() 
 
-    hash = bcrypt.hashpw(bytes, salt)
+    # hash = bcrypt.hashpw(bytes, salt)
 
     userinput = input("Your username")
     passwordinput = input("Your password")
