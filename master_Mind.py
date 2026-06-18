@@ -7,7 +7,30 @@
 print("MasterMind")
 
 import random
-# import bcrypt
+color_Map = {
+    "red": "1", "blue": "2", "green": "3",
+    "yellow": "4", "orange": "5", "purple": "6"
+}
+
+nummer =	{
+  1: "Red",
+  2: "Blue",
+  3: "Green",
+    4: "Yellow",
+    5: "Orange",
+    6: "Purple" 
+}
+print(nummer[1])    
+
+def parse_Guess(guess):
+    parts = guess.strip().lower().split()
+    result = []
+    for part in parts:
+        if part in color_Map:
+            result.append(color_Map[part])
+        else:
+            return None
+    return result
 
 
 
@@ -60,14 +83,15 @@ def play_Mastermind():
         guess = ""
         valid_Guess = False
         while not valid_Guess:
-            guess = input(f"Attempt {attempt}: ").strip()
-            valid_Guess = len(guess) == 4 and all(c in "123456" for c in guess)
-            if not valid_Guess:
-                print("Invalid input. Enter 4 digits, each from 1 to 6.")
-            show_Secret(secret_Code) if guess == "login" else False
-
-        black, white = get_Feedback(secret_Code, guess)
-        print(f"Black pegs (correct position): {black}, White pegs (wrong position): {white}")
+              raw = input(f"Attempt {attempt}: ").strip().lower()
+            parsed = parse_Guess(raw)
+        valid_Guess = parsed is not None and len(parsed) == 4
+        if not valid_Guess:
+            print("Invalid input. Use 4 colors or digits (e.g. 'red blue green yellow' or '1234').")
+        if valid_Guess:
+            guess = parsed 
+            black, white = get_Feedback(secret_Code, guess)
+            print(f"Black pegs (correct position): {black}, White pegs (wrong position): {white}")
 
         if black == 4:
             print(f"Congratulations! You guessed the code: {''.join(secret_Code)}")
