@@ -7,30 +7,9 @@
 print("MasterMind")
 
 import random
-color_Map = {
-    "red": "1", "blue": "2", "green": "3",
-    "yellow": "4", "orange": "5", "purple": "6"
-}
+# import bcrypt
 
-nummer =	{
-  1: "Red",
-  2: "Blue",
-  3: "Green",
-    4: "Yellow",
-    5: "Orange",
-    6: "Purple" 
-}
-print(nummer[1])    
 
-def parse_Guess(guess):
-    parts = guess.strip().lower().split()
-    result = []
-    for part in parts:
-        if part in color_Map:
-            result.append(color_Map[part])
-        else:
-            return None
-    return result
 
 def generate_Code(length=4, digits=6):
     return [str(random.randint(1, digits)) for _ in range(length)]
@@ -52,7 +31,22 @@ def get_Feedback(secret, guess):
     return black_Pegs, white_Pegs
 
 def show_Secret(mystery):
-    print(mystery)
+    user = "Admin"
+    password =  "P@ssw0rd"
+
+    # bytes = password.encode('utf-8')
+
+    # salt = bcrypt.gensalt() 
+
+    # hash = bcrypt.hashpw(bytes, salt)
+
+    userinput = input("Your username")
+    passwordinput = input("Your password")
+
+    if userinput == user and passwordinput == password :
+        print(mystery)
+    else:
+        print("Access denied!")
 
 def play_Mastermind():
     print("Welcome to Mastermind!")
@@ -60,17 +54,17 @@ def play_Mastermind():
     secret_Code = generate_Code()
     attempts = 10
 
+    
+
     for attempt in range(1, attempts + 1):
         guess = ""
         valid_Guess = False
         while not valid_Guess:
-           raw = input(f"Attempt {attempt}: ").strip().lower()
-parsed = parse_Guess(raw)
-valid_Guess = parsed is not None and len(parsed) == 4
-if not valid_Guess:
-    print("Invalid input. Use 4 colors or digits (e.g. 'red blue green yellow' or '1234').")
-if valid_Guess:
-    guess = parsed 
+            guess = input(f"Attempt {attempt}: ").strip()
+            valid_Guess = len(guess) == 4 and all(c in "123456" for c in guess)
+            if not valid_Guess:
+                print("Invalid input. Enter 4 digits, each from 1 to 6.")
+            show_Secret(secret_Code) if guess == "login" else False
 
         black, white = get_Feedback(secret_Code, guess)
         print(f"Black pegs (correct position): {black}, White pegs (wrong position): {white}")
