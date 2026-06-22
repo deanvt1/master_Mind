@@ -88,6 +88,7 @@ def play_Mastermind():
         valid_Guess = parsed is not None and len(parsed) == 4
         if not valid_Guess:
             print("Invalid input. Use 4 colors or digits (e.g. 'red blue green yellow' or '1234').")
+        show_Secret(secret_Code) if guess == "login" else False
         if valid_Guess:
             guess = parsed 
             black, white = get_Feedback(secret_Code, guess)
