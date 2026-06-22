@@ -16,4 +16,4 @@ jobs:
             python -m pip install --upgrade pip
             pip install flake8
         - name: run flake8
-          run: flake8 '/master_Mind.py'
+          run: flake8 'master_Mind.py'
