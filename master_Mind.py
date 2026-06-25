@@ -7,10 +7,7 @@
 print("MasterMind")
 
 import random
-color_Map = {
-    "red": "1", "blue": "2", "green": "3",
-    "yellow": "4", "orange": "5", "purple": "6"
-}
+
 
 nummer =	{
   1: "Red",
@@ -20,7 +17,8 @@ nummer =	{
     5: "Orange",
     6: "Purple" 
 }
-print(nummer[1])    
+print(nummer[1])  
+print(nummer[2])  
 
 def parse_Guess(guess):
     parts = guess.strip().lower().split()
