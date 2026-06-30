@@ -82,7 +82,7 @@ def play_Mastermind():
         valid_Guess = False
         while not valid_Guess:
               raw = input(f"Attempt {attempt}: ").strip().lower()
-            parsed = parse_Guess(raw)
+              parsed = parse_Guess(raw)
         valid_Guess = parsed is not None and len(parsed) == 4
         if not valid_Guess:
             print("Invalid input. Use 4 colors or digits (e.g. 'red blue green yellow' or '1234').")
